@@ -137,10 +137,10 @@ main{position:relative;z-index:2;min-height:calc(100vh - 68px);padding-top:68px;
 .card-title{font-size:17px;font-weight:500;color:var(--gold);}
 .card-desc{font-size:15px;color:var(--muted);line-height:1.6;}
 /* BOTTOM */
-.bottom-strip{grid-column:1/-1;border-top:1px solid var(--border2);background:rgba(7,6,4,0.7);padding:2.25rem 5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;animation:fadeUp 0.8s 0.5s ease both;}
+.bottom-strip{grid-column:1/-1;border-top:1px solid var(--border2);background:rgba(7,6,4,0.7);padding:2.25rem 5rem;display:flex;flex-direction:column;gap:1.25rem;animation:fadeUp 0.8s 0.5s ease both;}
 .bottom-quote{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;font-style:italic;color:var(--muted2);}
 .bottom-quote strong{color:var(--gold);font-style:normal;font-weight:600;}
-.bottom-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.bottom-right{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
 .footer-nav{display:flex;gap:1.75rem;flex-wrap:wrap;}
 .footer-nav a{font-size:14px;color:var(--muted2);text-decoration:none;transition:color 0.2s;}.footer-nav a:hover{color:var(--gold);}
 .bottom-copy{font-size:13px;color:rgba(253,248,240,0.25);}
@@ -156,7 +156,7 @@ main{position:relative;z-index:2;min-height:calc(100vh - 68px);padding-top:68px;
   .cards-strip{flex-wrap:wrap;}
   .card-item{flex:calc(50% - 0);border-bottom:1px solid var(--border2);}
   .bottom-strip{padding:2rem 1.25rem;flex-direction:column;align-items:flex-start;}
-  .bottom-right{align-items:flex-start;}
+  
 }
 </style>
 </head>
