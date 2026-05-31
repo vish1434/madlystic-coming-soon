@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madlystic — Coming Soon</title>
+<meta name="description" content="Discover authors. Discover books. Follow releases, announcements, and stories worth discovering.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--gold:#c9a84c;--gold2:#e8c97a;--dark:#0a0805;
+--cream:#faf6ee;--cream2:#f0e8d8;
+--muted:rgba(250,246,238,0.55);--border:rgba(201,168,76,0.2);
+}
+html,body{width:100%;min-height:100vh;background:var(--dark);font-family:'Outfit',sans-serif;color:var(--cream);overflow-x:hidden;}
+.noise{position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.6;}
+.bg{position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.1) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(201,168,76,0.05) 0%,transparent 60%),radial-gradient(ellipse 30% 30% at 80% 70%,rgba(201,168,76,0.04) 0%,transparent 60%),var(--dark);z-index:0;}
+.grid-lines{position:fixed;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px;z-index:0;}
+main{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center;}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:rgba(201,168,76,0.06);padding:8px 20px;border-radius:100px;font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2.5rem;animation:fadeUp 0.8s ease both;}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+
+/* LOGO */
+.logo{font-family:'Cormorant Garamond',serif;font-size:clamp(64px,12vw,110px);font-weight:300;letter-spacing:-0.02em;line-height:1;margin-bottom:0.5rem;animation:fadeUp 0.8s 0.1s ease both;background:linear-gradient(135deg,var(--cream) 0%,var(--gold2) 40%,var(--cream2) 70%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo em{font-style:italic;font-weight:600;}
+
+/* TAGLINE */
+.tagline-primary{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,32px);font-weight:600;color:var(--gold);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:1rem;animation:fadeUp 0.8s 0.15s ease both;}
+.tagline-secondary{font-family:'Outfit',sans-serif;font-size:clamp(16px,2.5vw,20px);font-weight:300;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:3rem;animation:fadeUp 0.8s 0.2s ease both;}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:16px;margin-bottom:2.5rem;animation:fadeUp 0.8s 0.25s ease both;}
+.divider-line{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.divider-diamond{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);}
+
+/* COMING SOON */
+.coming-soon{font-size:14px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:3rem;animation:fadeUp 0.8s 0.3s ease both;}
+
+/* FORM */
+.form-wrap{width:100%;max-width:520px;margin-bottom:3.5rem;animation:fadeUp 0.8s 0.35s ease both;}
+.form-label{font-size:16px;font-weight:400;color:var(--cream);letter-spacing:0.02em;margin-bottom:16px;display:block;}
+.form-row{display:flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.04);transition:border-color 0.3s;}
+.form-row:focus-within{border-color:rgba(201,168,76,0.6);}
+.form-input{flex:1;background:transparent;border:none;outline:none;padding:16px 22px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:300;color:var(--cream);}
+.form-input::placeholder{color:rgba(250,246,238,0.3);}
+.form-btn{background:var(--gold);border:none;padding:16px 28px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--dark);cursor:pointer;transition:background 0.2s;white-space:nowrap;}
+.form-btn:hover{background:var(--gold2);}
+.form-note{font-size:13px;color:rgba(250,246,238,0.3);margin-top:12px;}
+
+/* SUCCESS */
+.success-msg{display:none;flex-direction:column;align-items:center;gap:10px;background:rgba(201,168,76,0.08);border:1px solid var(--border);border-radius:10px;padding:24px 28px;}
+.success-msg.show{display:flex;}
+.success-icon{font-size:28px;color:var(--gold);}
+.success-title{font-size:18px;font-weight:500;color:var(--gold);}
+.success-sub{font-size:15px;color:var(--muted);font-style:italic;}
+
+/* FEATURES */
+.features{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:4rem;animation:fadeUp 0.8s 0.45s ease both;max-width:700px;}
+.feature{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.feature-icon{width:52px;height:52px;border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,0.06);font-size:22px;}
+.feature-text{font-size:14px;font-weight:400;color:var(--muted);letter-spacing:0.03em;text-align:center;line-height:1.4;max-width:100px;}
+
+/* SOCIAL */
+.social-row{display:flex;align-items:center;gap:16px;margin-bottom:3rem;animation:fadeUp 0.8s 0.55s ease both;}
+.social-label{font-size:13px;color:rgba(250,246,238,0.3);letter-spacing:0.08em;text-transform:uppercase;}
+.social-link{width:40px;height:40px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all 0.2s;}
+.social-link:hover{border-color:rgba(201,168,76,0.5);color:var(--gold);background:rgba(201,168,76,0.06);}
+
+/* BOTTOM */
+.bottom{animation:fadeUp 0.8s 0.65s ease both;}
+.bottom-text{font-size:13px;color:rgba(250,246,238,0.25);letter-spacing:0.03em;}
+.bottom-text a{color:rgba(201,168,76,0.5);text-decoration:none;}
+
+/* FLOATING BOOKS */
+.floating-books{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.float-book{position:absolute;border-radius:4px;opacity:0.06;animation:floatBook linear infinite;}
+@keyframes floatBook{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:0.06}90%{opacity:0.06}100%{transform:translateY(-200px) rotate(20deg);opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* DECO */
+.deco-left,.deco-right{position:fixed;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,168,76,0.08) 30%,rgba(201,168,76,0.08) 70%,transparent);z-index:1;}
+.deco-left{left:40px}.deco-right{right:40px}
+.corner{position:fixed;width:24px;height:24px;z-index:2;}
+.corner::before,.corner::after{content:'';position:absolute;background:rgba(201,168,76,0.3);}
+.corner::before{width:100%;height:1px;top:0;left:0}
+.corner::after{width:1px;height:100%;top:0;left:0}
+.corner-tl{top:20px;left:20px}
+.corner-tr{top:20px;right:20px;transform:scaleX(-1)}
+.corner-bl{bottom:20px;left:20px;transform:scaleY(-1)}
+.corner-br{bottom:20px;right:20px;transform:scale(-1)}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="noise"></div>
+<div class="grid-lines"></div>
+<div class="deco-left"></div>
+<div class="deco-right"></div>
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
+<div class="floating-books" id="floatingBooks"></div>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+<main>
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Something extraordinary is coming
+  </div>
+
+  <h1 class="logo">Madly<em>stic</em></h1>
+
+  <p class="tagline-primary">Discover Authors. Discover Books.</p>
+
+  <p class="tagline-secondary">Follow releases, announcements, and stories worth discovering. The platform built for authors who deserve to be found.</p>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="coming-soon">Coming Soon</p>
+
+  <div class="form-wrap">
+    <span class="form-label">Be the first to know when we launch</span>
+    <form id="waitlistForm"
+          action="https://script.google.com/macros/s/AKfycbz4tLhDyIWYmfY89JlGNcM0Y84jBrmg-w4yBKmyG-MEe_wjsaXwYlUpFnLL3wJZH8jU/exec"
+          method="POST"
+          target="hidden_iframe"
+          onsubmit="handleSubmit(event)">
+      <div class="form-row" id="formRow">
+        <input class="form-input" type="email" name="email" placeholder="your@email.com" id="emailInput" required />
+        <button class="form-btn" type="submit">Notify Me</button>
+      </div>
+    </form>
+    <div class="success-msg" id="successMsg">
+      <span class="success-icon">✦</span>
+      <span class="success-title">You're on the list!</span>
+      <span class="success-sub">We'll share the launch date with you soon.</span>
+    </div>
+    <p class="form-note" id="formNote">No spam. Just one email when we launch.</p>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">📚</div>
+      <span class="feature-text">Author Discovery</span>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">✦</div>
+      <span class="feature-text">Book Announcements</span>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🚀</div>
+      <span class="feature-text">New Releases</span>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔥</div>
+      <span class="feature-text">Trending Books</span>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">💎</div>
+      <span class="feature-text">Hidden Gems</span>
+    </div>
+  </div>
+
+  <div class="social-row">
+    <span class="social-label">Follow us</span>
+    <a class="social-link" href="https://instagram.com/madlystics" target="_blank" title="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+      </svg>
+    </a>
+    <a class="social-link" href="https://linkedin.com/company/madlystic" target="_blank" title="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+        <rect x="2" y="9" width="4" height="12"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="bottom">
+    <p class="bottom-text">© 2026 Madlystic &nbsp;·&nbsp; <a href="https://madlystic.com">madlystic.com</a> &nbsp;·&nbsp; Built for authors who deserve to be found.</p>
+  </div>
+</main>
+
+<script>
+function handleSubmit(e) {
+  const email = document.getElementById('emailInput').value.trim();
+  if (!email || !email.includes('@')) {
+    e.preventDefault();
+    document.getElementById('emailInput').style.outline = '1px solid rgba(201,168,76,0.6)';
+    document.getElementById('emailInput').focus();
+    return;
+  }
+  setTimeout(function() {
+    document.getElementById('formRow').style.display = 'none';
+    document.getElementById('waitlistForm').style.display = 'none';
+    document.getElementById('formNote').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  }, 500);
+}
+document.getElementById('emailInput').addEventListener('keydown', function() {
+  this.style.outline = '';
+});
+const colors = ['#c9a84c','#8b6914','#4a3a1a','#2a2010'];
+const booksContainer = document.getElementById('floatingBooks');
+for (let i = 0; i < 8; i++) {
+  const book = document.createElement('div');
+  book.className = 'float-book';
+  const w = Math.random() * 20 + 12;
+  const h = w * 1.4;
+  book.style.cssText = `width:${w}px;height:${h}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*20+15}s;animation-delay:${Math.random()*15}s;border-radius:2px;`;
+  booksContainer.appendChild(book);
+}
+</script>
+</body>
+</html>
