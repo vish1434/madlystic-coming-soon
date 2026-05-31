@@ -75,6 +75,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10;padding:0 4rem;height:68px;di
 .anim{animation:fadeUp 0.8s ease both;}
 .anim-1{animation-delay:0.1s}.anim-2{animation-delay:0.2s}.anim-3{animation-delay:0.3s}.anim-4{animation-delay:0.4s}.anim-5{animation-delay:0.5s}.anim-6{animation-delay:0.6s}
 /* MOBILE */
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--cream);border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(7,6,4,0.98);z-index:9;padding:2.5rem 2rem;flex-direction:column;gap:0;border-top:1px solid var(--border2);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-size:22px;font-weight:300;color:var(--muted);text-decoration:none;padding:1.1rem 0;border-bottom:1px solid var(--border2);font-family:'Cormorant Garamond',serif;letter-spacing:0.02em;transition:color 0.2s;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--gold);}
+.mobile-menu-social{display:flex;gap:12px;padding-top:2rem;margin-top:auto;}
+@media(max-width:960px){
+  .hamburger{display:flex;}
+  .nav-social{display:none;}
+}
 @media(max-width:960px){
   nav{padding:0 1.25rem;height:60px;}
   .nav-links{display:none;}
@@ -178,7 +194,23 @@ main{position:relative;z-index:2;min-height:calc(100vh - 68px);padding-top:68px;
     <a class="nav-social-link" href="https://x.com/Madlystic" target="_blank" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
     <a class="nav-social-link" href="https://linkedin.com/company/madlystic" target="_blank" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active">Home</a>
+  <a href="vision.html">Vision</a>
+  <a href="for-authors.html">For Authors</a>
+  <a href="for-readers.html">For Readers</a>
+  <a href="features.html">Features</a>
+  <a href="privacy.html">Privacy Policy</a>
+  <div class="mobile-menu-social">
+    <a class="nav-social-link" href="https://instagram.com/madlystics" target="_blank" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+    <a class="nav-social-link" href="https://x.com/Madlystic" target="_blank" title="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+    <a class="nav-social-link" href="https://linkedin.com/company/madlystic" target="_blank" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+  </div>
+</div>
 <main>
   <div class="hero-left">
     <div class="badge"><span class="badge-dot"></span>Something extraordinary is coming</div>
@@ -237,6 +269,15 @@ function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(
 anim();
 function handleSubmit(e){const email=document.getElementById('emailInput').value.trim();if(!email||!email.includes('@')){e.preventDefault();document.getElementById('emailInput').style.outline='2px solid rgba(201,168,76,0.6)';document.getElementById('emailInput').focus();return;}setTimeout(function(){document.getElementById('formRow').style.display='none';document.getElementById('waitlistForm').style.display='none';document.getElementById('formNote').style.display='none';document.getElementById('successMsg').classList.add('show');},500);}
 document.getElementById('emailInput').addEventListener('keydown',function(){this.style.outline='';this.style.boxShadow='';});
+</script>
+<script>
+function toggleMenu(){
+  const h=document.getElementById('hamburger');
+  const m=document.getElementById('mobileMenu');
+  h.classList.toggle('open');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
 </script>
 </body>
 </html>
