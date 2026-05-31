@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Features — Madlystic</title>
+<meta name="description" content="Everything Madlystic offers — author profiles, book listings, announcements, releases, shelves, and more.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a84c;--gold2:#e8c97a;--dark:#070604;--cream:#faf6ee;--cream2:#e8dfc8;--muted:rgba(250,246,238,0.72);--border:rgba(201,168,76,0.22);--border2:rgba(201,168,76,0.1);}
+html,body{width:100%;min-height:100vh;background:var(--dark);font-family:'Outfit',sans-serif;color:var(--cream);overflow-x:hidden;}
+.bg-base{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 30% 20%,rgba(201,168,76,0.06) 0%,transparent 65%),var(--dark);}
+.bg-grid{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:80px 80px;}
+.corner{position:fixed;width:28px;height:28px;z-index:3;}.corner::before,.corner::after{content:"";position:absolute;background:rgba(201,168,76,0.28);}.corner::before{width:100%;height:1px;top:0;left:0}.corner::after{width:1px;height:100%;top:0;left:0}.corner-tl{top:24px;left:24px}.corner-tr{top:24px;right:24px;transform:scaleX(-1)}.corner-bl{bottom:24px;left:24px;transform:scaleY(-1)}.corner-br{bottom:24px;right:24px;transform:scale(-1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;padding:0 4rem;height:68px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border2);background:rgba(7,6,4,0.85);backdrop-filter:blur(16px);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;letter-spacing:-0.02em;background:linear-gradient(135deg,var(--cream) 0%,var(--gold2) 60%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;}.nav-logo em{font-style:italic;font-weight:600;}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}.nav-links a{font-size:14px;font-weight:400;color:rgba(250,246,238,0.65);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;position:relative;}.nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.2s;}.nav-links a:hover{color:var(--cream);}.nav-links a:hover::after{transform:scaleX(1);}.nav-links a.active{color:var(--gold);}.nav-links a.active::after{transform:scaleX(1);}
+.nav-social{display:flex;gap:10px;align-items:center;}.nav-social-link{width:36px;height:36px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(250,246,238,0.55);text-decoration:none;transition:all 0.2s;}.nav-social-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.08);}
+.page-wrap{position:relative;z-index:2;padding-top:68px;}
+.page-hero{padding:6rem 8rem 5rem;border-bottom:1px solid var(--border2);animation:fadeUp 0.8s 0.1s ease both;}
+.page-eyebrow{font-size:13px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,84px);font-weight:300;line-height:1.06;letter-spacing:-0.02em;margin-bottom:1.5rem;}
+.page-title em{font-style:italic;font-weight:600;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-subtitle{font-size:20px;font-weight:300;color:var(--muted);line-height:1.75;max-width:640px;}
+.page-content{padding:5rem 8rem;}
+.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,54px);font-weight:300;margin-bottom:1rem;letter-spacing:-0.01em;}.section-heading em{font-style:italic;color:var(--gold);}
+.section-sub{font-size:18px;font-weight:300;color:var(--muted);line-height:1.75;max-width:600px;margin-bottom:3rem;}
+.fs-label{font-size:13px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.fs-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,46px);font-weight:300;margin-bottom:1rem;letter-spacing:-0.01em;}.fs-title em{font-style:italic;color:var(--gold);}
+.divider-gold{display:flex;align-items:center;gap:16px;margin:4rem 0;}.dg-line{flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}.dg-diamond{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}.dg-line-r{flex:1;height:1px;background:linear-gradient(270deg,var(--gold),transparent);}
+.feat-card{background:rgba(201,168,76,0.03);border:1px solid var(--border2);border-radius:14px;padding:2rem;transition:all 0.3s;}.feat-card:hover{background:rgba(201,168,76,0.07);border-color:var(--border);transform:translateY(-4px);}.feat-card-icon{font-size:28px;margin-bottom:1rem;}.feat-card-title{font-size:18px;font-weight:500;color:var(--cream);margin-bottom:0.6rem;}.feat-card-desc{font-size:15px;color:var(--muted);line-height:1.7;}
+.site-footer{border-top:1px solid var(--border2);padding:2.5rem 8rem;display:flex;align-items:center;justify-content:space-between;background:rgba(7,6,4,0.6);}.footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;background:linear-gradient(135deg,var(--cream),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.footer-logo em{font-style:italic;font-weight:600;}.footer-links{display:flex;gap:2rem;}.footer-links a{font-size:14px;color:rgba(250,246,238,0.5);text-decoration:none;transition:color 0.2s;}.footer-links a:hover{color:var(--gold);}.footer-copy{font-size:12px;color:rgba(250,246,238,0.2);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fadeUp 0.8s ease both;}.anim-1{animation-delay:0.1s}.anim-2{animation-delay:0.2s}.anim-3{animation-delay:0.3s}.anim-4{animation-delay:0.4s}.anim-5{animation-delay:0.5s}.anim-6{animation-delay:0.6s}
+@media(max-width:960px){nav{padding:0 1.5rem;}.nav-links{display:none;}.page-hero{padding:4rem 1.5rem 3rem;}.page-content{padding:3rem 1.5rem;}.site-footer{padding:2rem 1.5rem;flex-direction:column;gap:1.5rem;text-align:center;}.footer-links{flex-wrap:wrap;justify-content:center;}}
+</style>
+
+<style>
+.fs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem;margin-top:2.5rem;}
+.fs-grid-3{grid-template-columns:repeat(3,1fr);}
+.shelves-table{border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-top:2.5rem;}
+.shelf-row{display:grid;grid-template-columns:2fr 1fr 2fr;border-bottom:1px solid var(--border2);}.shelf-row:last-child{border-bottom:none;}
+.shelf-row.header{background:rgba(201,168,76,0.06);}
+.shelf-cell{padding:1.4rem 2rem;font-size:15px;color:var(--muted);}.shelf-cell:first-child{color:var(--cream);font-weight:500;}
+.shelf-row.header .shelf-cell{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.shelf-row:hover:not(.header){background:rgba(201,168,76,0.02);}
+@media(max-width:960px){.fs-grid{grid-template-columns:1fr 1fr;}.fs-grid-3{grid-template-columns:1fr;}.shelf-row{grid-template-columns:1fr;}.shelf-cell:not(:first-child){display:none;}}
+</style>
+</head>
+<body>
+<div class="bg-base"></div><div class="bg-grid"></div>
+<div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div>
+<nav>
+  <a class="nav-logo" href="index.html">Madly<em>stic</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="vision.html">Vision</a></li>
+    <li><a href="for-authors.html">For Authors</a></li><li><a href="for-readers.html">For Readers</a></li>
+    <li><a href="features.html" class="active">Features</a></li>
+  </ul>
+  <div class="nav-social">
+    <a class="nav-social-link" href="https://instagram.com/madlystics" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+    <a class="nav-social-link" href="https://x.com/Madlystic" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+    <a class="nav-social-link" href="https://linkedin.com/company/madlystic" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+  </div>
+</nav>
+<div class="page-wrap">
+  <div class="page-hero">
+    <p class="page-eyebrow">Platform Features</p>
+    <h1 class="page-title">Everything you need.<br><em>Nothing you don't.</em></h1>
+    <p class="page-subtitle">Madlystic is built around three things — author profiles, book discovery, and reader engagement. Simple, powerful, and designed to grow.</p>
+  </div>
+  <div class="page-content">
+    <div class="feature-section anim anim-1">
+      <p class="fs-label">Author Features</p>
+      <h2 class="fs-title">Your home on <em>Madlystic.</em></h2>
+      <div class="fs-grid">
+        <div class="feat-card"><div class="feat-card-icon">🏠</div><div class="feat-card-title">Author Profile</div><div class="feat-card-desc">Public profile at /@username with bio, photo, genres, social links, and follower count.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">📚</div><div class="feat-card-title">Book Listings</div><div class="feat-card-desc">List all your books with covers, descriptions, genres, series info, and multiple purchase links.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">📣</div><div class="feat-card-title">Announcements</div><div class="feat-card-desc">Post new releases, cover reveals, events, giveaways, and series updates directly to readers.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">🚀</div><div class="feat-card-title">Upcoming Releases</div><div class="feat-card-desc">List pre-release books with cover, description, and release date. Build anticipation early.</div></div>
+      </div>
+    </div>
+    <div class="divider-gold"><div class="dg-line"></div><div class="dg-diamond"></div><div class="dg-line-r"></div></div>
+    <div class="feature-section anim anim-2">
+      <p class="fs-label">Reader Features</p>
+      <h2 class="fs-title">Built for <em>discovery.</em></h2>
+      <div class="fs-grid">
+        <div class="feat-card"><div class="feat-card-icon">🔍</div><div class="feat-card-title">Author Discovery</div><div class="feat-card-desc">Browse and search authors by genre, popularity, or latest announcements.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">📖</div><div class="feat-card-title">Book Discovery</div><div class="feat-card-desc">Find books through curated shelves, genre filters, and editor recommendations.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">👥</div><div class="feat-card-title">Follow Authors</div><div class="feat-card-desc">Follow your favourite authors and stay updated on everything they publish and announce.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">🔖</div><div class="feat-card-title">Save Books</div><div class="feat-card-desc">Save books to your reading list and wishlist. Never lose track of what you want to read next.</div></div>
+      </div>
+    </div>
+    <div class="divider-gold"><div class="dg-line"></div><div class="dg-diamond"></div><div class="dg-line-r"></div></div>
+    <div class="feature-section anim anim-3">
+      <p class="fs-label">Homepage Shelves</p>
+      <h2 class="fs-title">Curated shelves. <em>Real discovery.</em></h2>
+      <div class="shelves-table">
+        <div class="shelf-row header"><div class="shelf-cell">Shelf</div><div class="shelf-cell">Type</div><div class="shelf-cell">Description</div></div>
+        <div class="shelf-row"><div class="shelf-cell">⭐ Editor's Choice</div><div class="shelf-cell">Editorial</div><div class="shelf-cell">Hand-picked by our editorial team. Cannot be purchased.</div></div>
+        <div class="shelf-row"><div class="shelf-cell">🔥 Trending Now</div><div class="shelf-cell">Algorithmic</div><div class="shelf-cell">Books gaining real momentum. Based on genuine engagement only.</div></div>
+        <div class="shelf-row"><div class="shelf-cell">⭐ Book of the Day</div><div class="shelf-cell">Editorial</div><div class="shelf-cell">One book, one day, genuinely earned. Never paid for.</div></div>
+        <div class="shelf-row"><div class="shelf-cell">💎 Hidden Gems</div><div class="shelf-cell">Featured</div><div class="shelf-cell">Underrated books given a spotlight. Available for promotion.</div></div>
+        <div class="shelf-row"><div class="shelf-cell">🚀 New Releases</div><div class="shelf-cell">Featured</div><div class="shelf-cell">Fresh launches this week. Available for promotion.</div></div>
+        <div class="shelf-row"><div class="shelf-cell">🎁 Freebies</div><div class="shelf-cell">Featured</div><div class="shelf-cell">Free books driving downloads. Available for promotion.</div></div>
+        <div class="shelf-row"><div class="shelf-cell">⚔️ Genre Spotlight</div><div class="shelf-cell">Featured</div><div class="shelf-cell">Genre-specific shelves for targeted discovery.</div></div>
+        <div class="shelf-row"><div class="shelf-cell">✨ Staff Picks</div><div class="shelf-cell">Featured</div><div class="shelf-cell">Books the Madlystic team is genuinely reading.</div></div>
+      </div>
+    </div>
+    <div class="divider-gold"><div class="dg-line"></div><div class="dg-diamond"></div><div class="dg-line-r"></div></div>
+    <div class="feature-section anim anim-4">
+      <p class="fs-label">Platform Features</p>
+      <h2 class="fs-title">Built right from <em>day one.</em></h2>
+      <div class="fs-grid fs-grid-3">
+        <div class="feat-card"><div class="feat-card-icon">🔗</div><div class="feat-card-title">Multiple Purchase Links</div><div class="feat-card-desc">Amazon, Kobo, Barnes & Noble, Apple Books, Google Play Books, and direct website links.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">📱</div><div class="feat-card-title">Social Sharing</div><div class="feat-card-desc">Share author profiles, books, and announcements on WhatsApp, Facebook, X, Telegram, LinkedIn, and more.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">🌍</div><div class="feat-card-title">Global Platform</div><div class="feat-card-desc">Built for authors and readers worldwide. US, UK, India, and beyond. Every genre, every market.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">📰</div><div class="feat-card-title">Editorial Articles</div><div class="feat-card-desc">Author interviews, industry news, writing guides, publishing guides, and featured content.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">🔎</div><div class="feat-card-title">SEO Optimised</div><div class="feat-card-desc">Every author profile and book page is SEO optimised with metadata, OpenGraph, and structured data.</div></div>
+        <div class="feat-card"><div class="feat-card-icon">✅</div><div class="feat-card-title">Quality Controlled</div><div class="feat-card-desc">All author profiles and books go through an approval process to maintain platform quality.</div></div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+  <span class="footer-logo">Madly<em>stic</em></span>
+  <div class="footer-links"><a href="vision.html">Vision</a><a href="for-authors.html">For Authors</a><a href="for-readers.html">For Readers</a><a href="features.html">Features</a><a href="privacy.html">Privacy Policy</a></div>
+  <span class="footer-copy">© 2026 Madlystic · Built for authors who deserve to be found.</span>
+</footer>
+</div>
+</body>
+</html>
